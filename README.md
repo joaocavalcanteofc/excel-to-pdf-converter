@@ -16,22 +16,40 @@ Consulte `PROJECTS.md` para o inventário técnico e as limitações conhecidas.
 
 ## Tecnologias detectadas
 
-- Python 3.11 no build existente;
+- Python 3.11 no build legado e Python 3.14 no ambiente de validação atual;
 - Tkinter para a interface gráfica;
 - pandas para leitura das planilhas;
 - módulo `fpdf` para geração dos arquivos PDF;
 - PyInstaller para geração do executável Windows.
 
-O build também contém referências a `openpyxl` e `xlrd`, normalmente utilizados pelo pandas para formatos Excel. Não há manifesto de dependências nem versões confiáveis registradas para todos os pacotes, portanto nenhum comando de instalação é indicado aqui.
+As dependências diretas estão registradas em `requirements.txt`. O ambiente completo usado nos testes, na auditoria e no empacotamento está fixado em `requirements-lock.txt`.
 
-## Execução e validação
+## Instalação e execução
 
-Não havia instruções de execução ou testes automatizados no conteúdo original. A aplicação e o executável existente não foram executados durante esta organização, e seu funcionamento atual não foi validado.
+Crie um ambiente virtual e instale as dependências de execução:
 
-Antes de executar ou reconstruir o projeto, confirme as dependências em um ambiente virtual isolado. O arquivo `Excel converter.py` também possui uma referência absoluta a um ícone no ambiente original, o que pode exigir atenção em outro computador.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe "Excel converter.py"
+```
+
+Para reproduzir o ambiente completo de desenvolvimento e executar as validações:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
+.\.venv\Scripts\python.exe -m pytest
+$env:PYTHONUTF8 = "1"
+.\.venv\Scripts\python.exe -m pip_audit -r requirements-lock.txt
+.\.venv\Scripts\python.exe -m PyInstaller "Excel converter.spec"
+```
+
+Os testes automatizados validam a localização portátil do ícone, a leitura de uma planilha `.xlsx` e a geração de um PDF. O build PyInstaller também foi concluído com sucesso. A seleção manual de arquivos e a aparência final da interface ainda devem ser verificadas interativamente em cada ambiente.
 
 ## Versionamento
 
 Os diretórios `build/` e `dist/` são artefatos gerados e permanecem fora do versionamento. O arquivo `Excel converter.spec` e o ícone são preservados como entradas necessárias para uma futura reconstrução.
+
+O workflow em `.github/workflows/ci.yml` executa testes, auditoria das dependências e validação do build. O Dependabot acompanha as dependências Python e as GitHub Actions.
 
 Nenhuma licença foi escolhida para este projeto.
