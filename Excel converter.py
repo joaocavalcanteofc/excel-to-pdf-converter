@@ -1,5 +1,5 @@
 import pandas as pd
-from fpdf import FPDF
+from fpdf import FPDF, XPos, YPos
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from pathlib import Path
@@ -12,17 +12,31 @@ def caminho_recurso(nome_arquivo):
 
 class PDF(FPDF):
     def header(self):
-        self.set_font("Arial", "B", 12)
-        self.cell(0, 10, "Tabela Convertida do Excel para PDF", ln=True, align="C")
+        self.set_font("Helvetica", "B", 12)
+        self.cell(
+            0,
+            10,
+            "Tabela Convertida do Excel para PDF",
+            new_x=XPos.LMARGIN,
+            new_y=YPos.NEXT,
+            align="C",
+        )
         self.ln(10)
 
     def footer(self):
         self.set_y(-15)
-        self.set_font("Arial", "I", 8)
-        self.cell(0, 10, f"Página {self.page_no()}", 0, 0, "C")
+        self.set_font("Helvetica", "I", 8)
+        self.cell(
+            0,
+            10,
+            f"Página {self.page_no()}",
+            new_x=XPos.RIGHT,
+            new_y=YPos.TOP,
+            align="C",
+        )
 
     def add_table(self, df):
-        self.set_font("Arial", "B", 10)
+        self.set_font("Helvetica", "B", 10)
         col_width = self.epw / len(df.columns)  # largura ajustada ao número de colunas
 
         # Cabeçalho da tabela
@@ -30,7 +44,7 @@ class PDF(FPDF):
             self.cell(col_width, 10, str(col), border=1)
         self.ln()
 
-        self.set_font("Arial", "", 10)
+        self.set_font("Helvetica", "", 10)
 
         # Dados da tabela
         for _, row in df.iterrows():

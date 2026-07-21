@@ -8,9 +8,9 @@
 | Finalidade aparente | Converter planilhas `.xlsx` ou `.xls` em arquivos PDF por meio de uma interface gráfica |
 | Linguagem | Python |
 | Tecnologias detectadas | Tkinter, pandas, módulo `fpdf` e PyInstaller |
-| Ambiente do build existente | Python 3.11 para Windows |
-| Status aparente | Projeto legado com artefato de build; funcionamento atual não validado |
-| Instruções existentes | Nenhuma documentação de instalação, execução ou teste foi encontrada |
+| Ambientes validados | Build legado com Python 3.11 e validação atual com Python 3.14 para Windows |
+| Status aparente | Projeto legado com núcleo de conversão e empacotamento validados; interface ainda requer verificação manual completa |
+| Instruções existentes | Instalação, execução, testes, auditoria e build documentados no `README.md` |
 
 ### Arquivos principais
 
@@ -20,9 +20,9 @@
 
 ### Observações
 
-- Não existe manifesto de dependências com versões reproduzíveis.
-- A distribuição responsável pelo módulo importado como `fpdf` não foi determinada com segurança.
-- `Excel converter.py` contém um caminho absoluto do computador original para carregar o ícone da janela.
+- As dependências diretas e o ambiente completo de validação estão registrados em manifests separados.
+- O módulo `fpdf` é fornecido pela distribuição `fpdf2` fixada no manifesto.
+- O ícone é resolvido de forma portátil tanto no código-fonte quanto no bundle PyInstaller.
 - `build/` contém arquivos intermediários e relatórios do PyInstaller.
 - `dist/Excel converter.exe` é um executável gerado, sem assinatura digital ou metadados de versão detectáveis.
-- Nenhum teste ou aplicação desconhecida foi executado durante a preparação para Git.
+- Os testes automatizados cobrem a leitura de `.xlsx`, a geração de PDF e a resolução do ícone.
