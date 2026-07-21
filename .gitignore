@@ -1,0 +1,71 @@
+# Environment files and local secrets
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+**/*.env
+
+# Safe environment templates
+!.env.example
+!.env.sample
+!.env.template
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+
+# Common credential and private-key files
+credentials.json
+client_secret*.json
+service-account*.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+.hypothesis/
+
+# Test and coverage output
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Local virtual environments
+.venv/
+venv/
+
+# Python packaging metadata
+.eggs/
+*.egg-info/
+.installed.cfg
+pip-wheel-metadata/
+
+# Analyzed PyInstaller output at this project root
+/build/
+/dist/
+
+# Logs, editor temporary files, and Office lock files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+~$*
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,16 @@
+# Keep the existing source and PyInstaller configuration line endings unchanged.
+*.py -text
+*.spec -text
+
+# New repository support files use LF.
+*.md text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Binary formats should not be normalized or produce textual diffs.
+*.ico binary
+*.exe binary
+*.pyc binary
+*.pyz binary
+*.pkg binary
+*.zip binary
